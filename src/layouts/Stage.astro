@@ -1,0 +1,73 @@
+---
+import { Font } from 'astro:assets';
+import CanvasHeader from '../components/CanvasHeader.astro';
+import CanvasFooter from '../components/CanvasFooter.astro';
+import { site } from '../data/site.ts';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Exact design canvas height in px for this page. */
+  pageH: number;
+}
+
+const { title, description, pageH } = Astro.props;
+const docTitle = `${title} | ${site.brand}`;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#070028" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{docTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.brand} />
+    <meta property="og:title" content={docTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={docTitle} />
+    <meta name="twitter:description" content={description} />
+
+    <Font cssVariable="--font-manrope" preload={[{ weight: 700 }, { weight: 800 }]} />
+    <Font cssVariable="--font-inter" preload={[{ weight: 400 }, { weight: 600 }]} />
+
+    {/* Set the canvas scale before first paint → no layout shift (CLS = 0). */}
+    <script is:inline>
+      (function () {
+        var d = document.documentElement;
+        function apply() {
+          var w = window.innerWidth || d.clientWidth || 1920;
+          d.style.setProperty('--scale', String(Math.min(1, w / 1920)));
+        }
+        apply();
+        window.addEventListener('resize', apply, { passive: true });
+      })();
+    </script>
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <div class="stage">
+      <div class="canvas-outer" style={`--page-h:${pageH}px`}>
+        <div class="canvas">
+          <CanvasHeader />
+          <main id="main" style="display:contents">
+            <slot />
+          </main>
+          <CanvasFooter />
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,42 @@
+---
+import { nav } from '../data/site.ts';
+---
+
+<header
+  style="position:absolute;top:0;left:0;width:1920px;padding:60px 70px 0;display:flex;align-items:center;justify-content:space-between;z-index:40"
+>
+  <a href="/" style="display:flex;gap:10px;align-items:center;cursor:pointer">
+    <span
+      aria-hidden="true"
+      style="background:#895dff;display:flex;align-items:center;justify-content:center;border-radius:9px;width:36px;height:36px;font-family:var(--font-manrope);font-weight:700;font-size:13px;color:#130d00"
+      >RM</span
+    >
+    <span style="font-family:var(--font-manrope);font-weight:700;font-size:18px;color:#fff"
+      >Rovex <span style="color:#895dff">Media</span></span
+    >
+  </a>
+
+  <nav
+    aria-label="Primary"
+    style="display:flex;gap:80px;align-items:center;font-size:14px;color:#fff"
+  >
+    {nav.map((i) => (
+      <a class="nav" href={i.href} style="color:inherit">{i.label}</a>
+    ))}
+  </nav>
+
+  <div style="display:flex;gap:20px;align-items:center">
+    <a
+      href="/contact"
+      style="background:rgba(255,255,255,0.04);display:flex;align-items:center;justify-content:center;height:53px;width:144px;border:1px solid rgba(255,255,255,0.25);border-radius:35px;cursor:pointer"
+    >
+      <span style="font-family:var(--font-manrope);font-weight:700;font-size:14px;color:#edf0fa">Get in Touch</span>
+    </a>
+    <a
+      href="/contact"
+      style="display:flex;align-items:center;justify-content:center;height:53px;width:183px;border-radius:35px;cursor:pointer;background:linear-gradient(146deg,#895dff 16%,#8b33f7 156%)"
+    >
+      <span style="font-family:var(--font-manrope);font-weight:700;font-size:14px;color:#fff">Start Cooperation</span>
+    </a>
+  </div>
+</header>

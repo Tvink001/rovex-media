@@ -1,0 +1,79 @@
+---
+import { footer } from '../data/site.ts';
+
+const socialSvg = {
+  telegram: '<svg width="17" height="17" viewBox="0 0 16.7143 16.7143" fill="none" aria-hidden="true"><path d="M15.3138 8.31934C15.3139 8.50491 15.2767 8.68861 15.2044 8.85953C15.1322 9.03046 15.0264 9.18514 14.8932 9.31439C14.7601 9.44364 14.6023 9.54484 14.4293 9.61198C14.2563 9.67912 14.0716 9.71083 13.8861 9.70523L10.5864 9.60843L8.18097 14.583C7.98806 14.9828 7.58204 15.2377 7.13772 15.2377C7.04647 15.2377 6.95624 15.2184 6.873 15.181C6.78976 15.1436 6.7154 15.089 6.65484 15.0208C6.59428 14.9525 6.5489 14.8722 6.52169 14.7851C6.49448 14.6979 6.48607 14.6061 6.49701 14.5155L7.09803 9.50606L4.47597 9.42945L4.13472 10.3634C4.07151 10.5362 3.95672 10.6855 3.80587 10.791C3.65503 10.8965 3.47542 10.9532 3.29135 10.9532C3.20886 10.9533 3.12717 10.9371 3.05095 10.9056C2.97473 10.874 2.90549 10.8278 2.8472 10.7694C2.7889 10.711 2.7427 10.6418 2.71124 10.5655C2.67978 10.4893 2.66368 10.4075 2.66387 10.3251V9.29713L2.09976 9.17943C1.90218 9.13827 1.72481 9.03032 1.59749 8.87374C1.47016 8.71716 1.40065 8.5215 1.40065 8.31969C1.40065 8.11787 1.47016 7.92222 1.59749 7.76564C1.72481 7.60905 1.90218 7.50111 2.09976 7.45995L2.66387 7.34295V6.31363C2.6637 6.16078 2.71938 6.01314 2.82045 5.89848C2.92151 5.78382 3.06099 5.71004 3.21265 5.69102L3.29135 5.68615C3.47522 5.68631 3.65462 5.7429 3.80531 5.84826C3.956 5.95362 4.07074 6.10268 4.13403 6.27532L4.47667 7.20854L7.08897 7.13193L6.49701 2.19843L6.49422 2.16013L6.49283 2.12182C6.49283 1.76595 6.78185 1.47693 7.13772 1.47693C7.54513 1.47693 7.91981 1.69073 8.12874 2.03407L8.18097 2.13157L10.5509 7.03095L13.8868 6.93345C14.0688 6.92807 14.2501 6.95861 14.4203 7.02333C14.5905 7.08804 14.7463 7.18567 14.8788 7.31063C15.0112 7.43558 15.1178 7.58542 15.1923 7.75157C15.2668 7.91772 15.3079 8.09693 15.3131 8.27895L15.3138 8.31934Z" fill="#fff" fill-opacity="0.5"/></svg>',
+  linkedin: '<svg width="20" height="20" viewBox="0 0 22.2857 22.2857" fill="none" aria-hidden="true"><path d="M6.44415 4.64308C6.44391 5.13562 6.24801 5.6079 5.89955 5.956C5.55109 6.30411 5.07863 6.49954 4.58608 6.49929C4.09354 6.49905 3.62126 6.30315 3.27315 5.95469C2.92505 5.60624 2.72962 5.13377 2.72987 4.64122C2.73011 4.14868 2.92601 3.6764 3.27447 3.32829C3.62292 2.98019 4.09539 2.78476 4.58794 2.78501C5.08048 2.78525 5.55276 2.98115 5.90086 3.32961C6.24897 3.67806 6.4444 4.15053 6.44415 4.64308ZM6.49987 7.87451H2.78558V19.5002H6.49987V7.87451ZM12.3684 7.87451H8.67272V19.5002H12.3313V13.3995C12.3313 10.0009 16.7606 9.68522 16.7606 13.3995V19.5002H20.4284V12.1366C20.4284 6.40736 13.8727 6.62094 12.3313 9.43451L12.3684 7.87451Z" fill="#fff" fill-opacity="0.5"/></svg>',
+  x: '<svg width="18" height="17" viewBox="0 0 18.5714 16.831" fill="none" aria-hidden="true"><path d="M14.625 0H17.4731L11.2516 7.12878L18.5714 16.831H12.8408L8.34918 10.9479L3.21551 16.831H0.364796L7.01867 9.20347L0 0.00132651H5.87653L9.93041 5.37776L14.625 0ZM13.6235 15.1224H15.202L5.01429 1.61969H3.32163L13.6235 15.1224Z" fill="#fff" fill-opacity="0.5"/></svg>',
+  discord: '<svg width="21" height="16" viewBox="0 0 21.9643 16.2857" fill="none" aria-hidden="true"><path d="M8.62543 0C5.92114 0 3.73886 2.04 3.37543 4.63371C1.45543 5.14629 0 6.828 0 8.89286C0 11.1831 1.78371 13.0243 4.01829 13.2857C4.64143 15.0274 6.24171 16.2857 8.19686 16.2857C9.53571 16.2857 10.6354 15.606 11.4651 14.6786C12.1466 15.2057 12.9497 15.5897 13.8754 15.5897C15.6394 15.5897 17.0914 14.4154 17.6254 12.8297H17.706C20.0443 12.8297 21.9643 10.9269 21.9643 8.598C21.9643 6.61114 20.5346 5.00229 18.6703 4.55314C18.0703 2.90229 16.536 1.68771 14.6786 1.68771C13.9826 1.68771 13.362 1.902 12.7774 2.196C11.7917 0.925714 10.3569 0 8.62543 0Z" fill="#fff" fill-opacity="0.5"/></svg>',
+};
+---
+
+<footer
+  style="position:absolute;bottom:0;left:0;width:1920px;background:#070128;padding:100px 195px;z-index:30"
+>
+  <div style="display:flex;gap:197px;align-items:flex-start;width:1530px">
+    <div style="display:flex;flex-direction:column;justify-content:space-between;height:441px;width:453px">
+      <div style="display:flex;flex-direction:column;gap:29px">
+        <a href="/" style="display:flex;gap:10px;align-items:center;cursor:pointer">
+          <span
+            aria-hidden="true"
+            style="background:#895dff;display:flex;align-items:center;justify-content:center;border-radius:9px;width:36px;height:36px;font-family:var(--font-manrope);font-weight:700;font-size:13px;color:#130d00"
+            >RM</span
+          >
+          <span style="font-family:var(--font-manrope);font-weight:700;font-size:18px;color:#fff"
+            >Rovex <span style="color:#895dff">Media</span></span
+          >
+        </a>
+        <p style="font-size:14px;line-height:1.8;color:rgba(255,255,255,0.5)">
+          Premium performance media buying for the world's most ambitious advertisers and
+          affiliate partners. Built for scale. Optimised for ROI.
+        </p>
+      </div>
+
+      <ul style="display:flex;gap:10px;align-items:center;list-style:none;margin:0;padding:0">
+        {footer.socials.map((s) => (
+          <li>
+            <a
+              class="social"
+              href={s.href}
+              aria-label={s.label}
+              rel={s.href.startsWith('http') ? 'noopener' : undefined}
+              target={s.href.startsWith('http') ? '_blank' : undefined}
+              style="background:#070128;border:1px solid #fff;border-radius:14.857px;width:65px;height:65px;display:flex;align-items:center;justify-content:center"
+              set:html={socialSvg[s.icon as keyof typeof socialSvg]}
+            />
+          </li>
+        ))}
+      </ul>
+
+      <p style="font-size:14px;line-height:24px;letter-spacing:0.49px;color:rgba(255,255,255,0.5)">
+        © 2026 Rovex Media. All rights reserved. rhine-media.com
+      </p>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:91px;width:649px">
+      <div style="display:flex;gap:134px;align-items:flex-start">
+        {footer.columns.map((col) => (
+          <nav aria-label={col.heading} style="display:flex;flex-direction:column;gap:21px">
+            <p style="font-weight:600;font-size:12px;letter-spacing:0.96px;text-transform:uppercase;color:#edf0fa;white-space:nowrap">{col.heading}</p>
+            <div style="display:flex;flex-direction:column;gap:13px;font-size:14px;line-height:24px;color:rgba(255,255,255,0.5)">
+              {col.links.map((l) => (
+                <a class="flink" href={l.href} style="color:inherit;white-space:nowrap">{l.label}</a>
+              ))}
+            </div>
+          </nav>
+        ))}
+      </div>
+
+      <nav
+        aria-label="Legal"
+        style="display:flex;gap:50px;font-size:14px;line-height:24px;letter-spacing:0.49px;color:rgba(255,255,255,0.5)"
+      >
+        {footer.legal.map((l) => (
+          <a class="flink" href={l.href} style="color:inherit">{l.label}</a>
+        ))}
+      </nav>
+    </div>
+  </div>
+</footer>

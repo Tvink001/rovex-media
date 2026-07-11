@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="36" height="36">
+  <rect width="36" height="36" rx="9" fill="#895dff" />
+  <text x="50%" y="52%" dominant-baseline="central" text-anchor="middle"
+        font-family="'Manrope','Segoe UI',system-ui,sans-serif" font-weight="700"
+        font-size="13" letter-spacing="-0.3" fill="#130d00">RM</text>
+</svg>
