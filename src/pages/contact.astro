@@ -1,0 +1,200 @@
+---
+import Stage from '../layouts/Stage.astro';
+import { Image } from 'astro:assets';
+import { site, verticalOptions, budgetOptions, faqs, art } from '../data/site.ts';
+
+const description =
+  'Contact Rovex Media. Advertisers, affiliate networks and brands — tell us about your offer, GEOs and budget. Our team replies within 2-4 business hours.';
+---
+
+<Stage title="Contact" description={description} pageH={3000}>
+  {/* backgrounds */}
+  <div style="position:absolute;left:50%;top:1140px;width:1916px;height:1249px;transform:translateX(-50%) scaleY(-1);z-index:0"><svg width="1916" height="1249" viewBox="0 0 1916 1249" preserveAspectRatio="none" style="display:block"><defs><linearGradient id="cg54" gradientUnits="userSpaceOnUse" x1="958" y1="-364.163" x2="958" y2="1536.76"><stop stop-color="#070028"></stop><stop offset="1" stop-color="#422B7F" stop-opacity="0"></stop></linearGradient></defs><rect width="1916" height="1249" fill="url(#cg54)"></rect></svg></div>
+  <div style="position:absolute;left:50%;top:1416px;width:1916px;height:973px;transform:translateX(-50%) scaleY(-1);z-index:0;background:rgba(7,0,40,0.3);border-radius:80px"></div>
+  <div style="position:absolute;left:50%;top:30px;width:1859px;height:1989px;transform:translateX(-50%);z-index:0"><svg width="1859" height="1989" viewBox="0 0 1859 1989" preserveAspectRatio="none" style="display:block"><defs><linearGradient id="cg48" gradientUnits="userSpaceOnUse" x1="929.5" y1="-481.5" x2="929.5" y2="1684.26"><stop stop-color="#070028"></stop><stop offset="1" stop-color="#422B7F" stop-opacity="0"></stop></linearGradient></defs><path d="M0 50C0 22.3858 22.3858 0 50 0L1809 0C1836.61 0 1859 22.3858 1859 50V1939C1859 1966.61 1836.61 1989 1809 1989H50C22.3858 1989 0 1966.61 0 1939V50Z" fill="url(#cg48)"></path></svg></div>
+
+  {/* rocket (motion) */}
+  <div style="position:absolute;left:569px;top:815px;z-index:3;animation:floatY 3s ease-in-out infinite;--fy:-14px"><Image src={art.decoRocket} alt="" width={628} style="display:block;width:314px;height:251px;object-fit:contain;transform:rotate(-7.98deg)" /></div>
+
+  {/* left title block */}
+  <div style="position:absolute;left:195px;top:229px;width:520px;z-index:2;display:flex;flex-direction:column;gap:50px">
+    <div style="display:flex;flex-direction:column;gap:25px;width:511px">
+      <h1 style="font-family:var(--font-manrope);font-weight:800;font-size:85px;line-height:1.2;color:#edf0fa;margin:0">
+        Contact<br><span style="white-space:nowrap">Rovex <span style="color:#895dff">Media</span></span>
+      </h1>
+      <p style="font-size:20px;line-height:1.8;color:rgba(255,255,255,0.6);width:345px">Ready to start? Have a question? Our team responds within 24 hours.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:25px">
+      <h2 style="font-family:var(--font-manrope);font-weight:800;font-size:25px;line-height:1.5;color:#edf0fa;width:404px;margin:0">Let's Build Something<br><span style="color:#895dff">Profitable Together</span></h2>
+      <p style="font-size:20px;line-height:1.8;color:rgba(255,255,255,0.6)">Whether you're an advertiser looking to scale your offers, an affiliate network seeking a reliable buying team, or a brand ready to expand globally — we want to hear from you.</p>
+    </div>
+  </div>
+
+  {/* contact info */}
+  <div style="position:absolute;left:195px;top:893px;width:311px;z-index:2;display:flex;flex-direction:column;gap:40px">
+    <div style="display:flex;flex-direction:column;gap:10px"><p style="font-weight:300;font-size:14px;letter-spacing:0.28px;color:rgba(255,255,255,0.5)">Telegram</p><p style="font-weight:500;font-size:18px;color:#fff"><a href={site.telegramUrl} style="color:#fff">@rovexmedia</a></p></div>
+    <div style="display:flex;flex-direction:column;gap:10px"><p style="font-weight:300;font-size:14px;letter-spacing:0.28px;color:rgba(255,255,255,0.5)">Email</p><p style="font-weight:500;font-size:18px;color:#fff"><a href={`mailto:${site.email}`} style="color:#fff">hello@rovex-media.com</a></p></div>
+    <div style="display:flex;flex-direction:column;gap:10px"><p style="font-weight:300;font-size:14px;letter-spacing:0.28px;color:rgba(255,255,255,0.5)">Business Hours</p><p style="font-weight:500;font-size:18px;color:#fff;width:264px">Mon – Fri  ·  09:00 – 20:00 CET</p></div>
+    <div style="display:flex;flex-direction:column;gap:10px"><p style="font-weight:300;font-size:14px;letter-spacing:0.28px;color:rgba(255,255,255,0.5)">Response Time</p><p style="font-weight:500;font-size:18px;letter-spacing:0.18px;color:#fff">Typically within 2–4 business hours</p></div>
+  </div>
+
+  {/* form card */}
+  <div style="position:absolute;left:845px;top:229px;width:880px;background:#14093b;border-radius:50px;padding:60px;z-index:2">
+    <form class="cform" novalidate style="display:flex;flex-direction:column;gap:30px">
+      <p style="font-family:var(--font-manrope);font-weight:800;font-size:25px;line-height:1.5;color:#edf0fa">Send Us a Message</p>
+      <div style="display:flex;flex-direction:column;gap:44px">
+        <div style="display:flex;flex-direction:column;gap:40px">
+          <div style="display:flex;gap:30px">
+            <div style="flex:1;display:flex;flex-direction:column;gap:13px"><label for="firstName" style="font-weight:500;font-size:13px;color:rgba(255,255,255,0.6)">First Name *</label><input id="firstName" name="firstName" class="fld" autocomplete="given-name" placeholder="John" required></div>
+            <div style="flex:1;display:flex;flex-direction:column;gap:13px"><label for="lastName" style="font-weight:500;font-size:13px;color:rgba(255,255,255,0.6)">Last Name *</label><input id="lastName" name="lastName" class="fld" autocomplete="family-name" placeholder="Smith" required></div>
+          </div>
+          <div style="display:flex;gap:30px">
+            <div style="flex:1;display:flex;flex-direction:column;gap:13px"><label for="email" style="font-weight:500;font-size:13px;color:rgba(255,255,255,0.6)">Email Address *</label><input id="email" name="email" type="email" class="fld" autocomplete="email" placeholder="john@company.com" required></div>
+            <div style="flex:1;display:flex;flex-direction:column;gap:13px"><label for="handle" style="font-weight:500;font-size:13px;color:rgba(255,255,255,0.6)">Telegram / Skype Handle</label><input id="handle" name="handle" class="fld" placeholder="@yourusername"></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:13px"><label for="company" style="font-weight:500;font-size:13px;color:rgba(255,255,255,0.6)">Company / Brand</label><input id="company" name="company" class="fld" autocomplete="organization" placeholder="Your company name"></div>
+          <div style="display:flex;gap:30px">
+            <div style="flex:1;display:flex;flex-direction:column;gap:13px"><label for="vertical" style="font-weight:500;font-size:13px;color:rgba(255,255,255,0.6)">Vertical / Niche *</label><select id="vertical" name="vertical" class="fld" required><option value="" disabled selected>Select a vertical</option>{verticalOptions.map((v) => <option value={v}>{v}</option>)}</select></div>
+            <div style="flex:1;display:flex;flex-direction:column;gap:13px"><label for="budget" style="font-weight:500;font-size:13px;color:rgba(255,255,255,0.6)">Monthly Budget (USD)</label><select id="budget" name="budget" class="fld"><option value="" disabled selected>Select budget range…</option>{budgetOptions.map((b) => <option value={b}>{b}</option>)}</select></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:13px"><label for="message" style="font-weight:500;font-size:13px;color:rgba(255,255,255,0.6)">Message *</label><textarea id="message" name="message" class="fld" required placeholder="Tell us about your offer, goals, GEOs and any other details that will help us understand your needs..."></textarea></div>
+        </div>
+        <div style="display:flex;gap:53px;align-items:center">
+          <div style="display:flex;gap:16px;align-items:flex-start">
+            <input id="consent" name="consent" type="checkbox" required style="margin-top:2px;width:24px;height:24px;accent-color:#895dff;flex:none">
+            <label for="consent" style="font-size:14px;line-height:1.8;color:rgba(255,255,255,0.6);width:411px">I agree to the <a class="consent-link" href="/privacy">Privacy Policy</a> and <a class="consent-link" href="/terms">Terms of Service</a>. I consent to Rhine Media processing my data to respond to this enquiry.</label>
+          </div>
+          <button type="submit" style="display:flex;align-items:center;justify-content:center;height:53px;width:258px;border:0;border-radius:35px;cursor:pointer;background:linear-gradient(154deg,#895dff 16%,#8b33f7 156%);flex:none;font-family:var(--font-manrope);font-weight:700;font-size:14px;color:#fff">Send Message</button>
+        </div>
+        <p class="cform__status" role="status" aria-live="polite" hidden></p>
+      </div>
+    </form>
+  </div>
+
+  {/* FAQ */}
+  <div style="position:absolute;left:195px;top:1577px;z-index:2;display:flex;gap:158px;align-items:flex-start">
+    <div style="display:flex;flex-direction:column;gap:25px;width:492px">
+      <h2 style="font-family:var(--font-manrope);font-weight:800;font-size:85px;line-height:1.2;color:#edf0fa;margin:0">Common<br><span style="color:#895dff">Questions</span></h2>
+      <div style="font-size:20px;line-height:1.8;color:rgba(255,255,255,0.6)"><p>Everything you need to know before starting</p><p>a cooperation with Rhine Media.</p></div>
+    </div>
+    <div class="faqs" style="display:flex;flex-direction:column;width:880px">
+      {faqs.map((f, i) => (
+        <details class="faq" open={i === 0}>
+          <summary class="faq__q"><span>{f.q}</span><span class="faq__icon" aria-hidden="true"></span></summary>
+          <div class="faq__a"><p>{f.a}</p></div>
+        </details>
+      ))}
+    </div>
+  </div>
+</Stage>
+
+<style>
+  .faq {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .faq__q {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 22px 0;
+    cursor: pointer;
+    list-style: none;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.8;
+    color: #fff;
+  }
+  .faq__q::-webkit-details-marker {
+    display: none;
+  }
+  .faq__q:hover {
+    color: #a887ff;
+  }
+  .faq__icon {
+    position: relative;
+    flex: none;
+    width: 18px;
+    height: 18px;
+  }
+  .faq__icon::before,
+  .faq__icon::after {
+    content: '';
+    position: absolute;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 2px;
+    transition: opacity 0.2s ease;
+  }
+  .faq__icon::before {
+    left: 2px;
+    right: 2px;
+    top: 8px;
+    height: 1.5px;
+  }
+  .faq__icon::after {
+    top: 2px;
+    bottom: 2px;
+    left: 8px;
+    width: 1.5px;
+  }
+  .faq[open] .faq__icon::after {
+    opacity: 0;
+  }
+  .faq__a {
+    padding: 0 0 24px;
+    max-width: 791px;
+  }
+  .faq__a p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .consent-link {
+    color: #9068ff;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .consent-link:hover {
+    color: #a887ff;
+  }
+
+  .cform__status {
+    margin: 0;
+    padding: 14px 18px;
+    border-radius: 12px;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  .cform__status[data-tone='ok'] {
+    background: rgba(137, 93, 255, 0.14);
+    border: 1px solid #895dff;
+    color: #edf0fa;
+  }
+  .cform__status[data-tone='err'] {
+    background: rgba(255, 99, 99, 0.12);
+    border: 1px solid rgba(255, 120, 120, 0.6);
+    color: #ffd8d8;
+  }
+</style>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('.cform');
+  const status = form?.querySelector<HTMLParagraphElement>('.cform__status');
+  form?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    if (!status) return;
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      status.hidden = false;
+      status.dataset.tone = 'err';
+      status.textContent = 'Please complete the required fields highlighted above.';
+      return;
+    }
+    const name = (form.elements.namedItem('firstName') as HTMLInputElement)?.value || 'there';
+    status.hidden = false;
+    status.dataset.tone = 'ok';
+    status.textContent = `Thanks, ${name.trim()}! Your message is ready to send — our team replies within 2-4 business hours.`;
+    form.reset();
+  });
+</script>
