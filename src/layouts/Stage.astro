@@ -43,7 +43,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
     <Font cssVariable="--font-manrope" preload={[{ weight: 700 }, { weight: 800 }]} />
     <Font cssVariable="--font-inter" preload={[{ weight: 400 }, { weight: 600 }]} />
 
-    {/* Set the canvas scale before first paint → no layout shift (CLS = 0). */}
+    {/* Set the canvas scale before first paint, so there is no layout shift (CLS = 0). */}
     <script is:inline>
       (function () {
         var d = document.documentElement;
