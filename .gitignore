@@ -24,3 +24,5 @@ Thumbs.db
 
 # design source bundle - not part of the deliverable
 design-recreation-project/
+
+.vercel

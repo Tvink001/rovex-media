@@ -272,3 +272,24 @@ textarea.fld {
     transition-duration: 0.001ms !important;
   }
 }
+
+/* Purple scrollbar (Media Up style, in the Rovex palette). */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #895dff #070028;
+}
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+::-webkit-scrollbar-track {
+  background: #070028;
+}
+::-webkit-scrollbar-thumb {
+  background: #895dff;
+  border: 3px solid #070028;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #a887ff;
+}
