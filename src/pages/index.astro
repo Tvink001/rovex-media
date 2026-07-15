@@ -97,9 +97,9 @@ const description =
     </div>
     <div class="vcarousel" aria-label="Verticals we operate in">
       <ul class="vtrack">
-        {[...verticals, ...verticals].map((v) => (
-          <li class="v-item" style="flex:none">
-            <div style="position:relative;width:360px;height:447px;background:#070128;border-radius:30px;padding:180px 40px 40px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden">
+        {[...verticals, ...verticals, ...verticals].map((v) => (
+          <li class="v-item">
+            <div class="v-card" style="position:relative;width:360px;height:447px;background:#070128;border-radius:30px;padding:180px 40px 40px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden">
               <div class="v-glow" aria-hidden="true" style="position:absolute;inset:0;border-radius:30px;background:linear-gradient(to top,#070128 9%,#895dff 248%)"></div>
               <div style="position:absolute;right:50px;top:50px;width:90px;height:90px;z-index:2"><Image src={v.img} alt="" width={180} style="width:100%;height:100%;object-fit:contain" /></div>
               <div style="position:relative;z-index:2;display:flex;flex-direction:column;gap:20px">
@@ -111,6 +111,12 @@ const description =
           </li>
         ))}
       </ul>
+      <button class="v-nav v-nav--prev" type="button" aria-label="Previous vertical">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 4L7 12L15 20" stroke="#895dff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      </button>
+      <button class="v-nav v-nav--next" type="button" aria-label="Next vertical">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 4L17 12L9 20" stroke="#895dff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      </button>
     </div>
   </div>
 
@@ -183,72 +189,178 @@ const description =
 </Stage>
 
 <style>
-  /* Verticals carousel: an endless belt that scrolls left through a fixed
-     centre; the card passing through that centre lightens. */
+  /* Verticals carousel: the arrows step cards through a fixed centre. Cards
+     come in three sizes - large in the centre (and lit), medium either side,
+     small at the edges where they fade out. data-dist is the card's distance
+     from the centre, set by the script. */
   .vcarousel {
+    position: relative;
     width: 100%;
     overflow: hidden;
+    padding: 30px 0;
+    /* Each slot is as wide as the card it shows, so one gap value spaces the
+       whole row evenly. The script reads these to place the centred card. */
+    --v-lg: 400px;
+    --v-md: 300px;
+    --v-sm: 225px;
+    --v-gap: 30px;
   }
   .vtrack {
     display: flex;
-    gap: 45px;
+    gap: var(--v-gap);
     width: max-content;
     margin: 0;
     padding: 0;
     list-style: none;
+    transition: transform 0.5s ease;
     will-change: transform;
   }
+
+  /* medium (default) */
+  .v-item {
+    flex: none;
+    width: var(--v-md);
+    display: flex;
+    justify-content: center;
+    transition: width 0.5s ease, opacity 0.5s ease;
+  }
+  /* large, centred */
+  .v-item[data-dist='0'] {
+    width: var(--v-lg);
+    z-index: 2;
+  }
+  /* small, fading out towards the edges */
+  .v-item[data-dist='2'] {
+    width: var(--v-sm);
+    opacity: 0.55;
+  }
+  .v-item[data-dist='3'] {
+    width: var(--v-sm);
+    opacity: 0.22;
+  }
+  .v-item[data-dist='4'] {
+    width: var(--v-sm);
+    opacity: 0;
+  }
+
+  /* The card is laid out at its design size and scaled to fill its slot, so the
+     text and art grow and shrink with it. */
+  .v-card {
+    flex: none;
+    transform: scale(0.8333); /* 300 / 360 */
+    transition: transform 0.5s ease;
+  }
+  .v-item[data-dist='0'] .v-card {
+    transform: scale(1.1111); /* 400 / 360 */
+  }
+  .v-item[data-dist='2'] .v-card,
+  .v-item[data-dist='3'] .v-card,
+  .v-item[data-dist='4'] .v-card {
+    transform: scale(0.625); /* 225 / 360 */
+  }
+
   .v-glow {
     opacity: 0;
-    transition: opacity 0.45s ease;
+    transition: opacity 0.5s ease;
   }
-  .v-item.is-center .v-glow {
+  .v-item[data-dist='0'] .v-glow {
     opacity: 1;
+  }
+
+  .v-nav {
+    position: absolute;
+    top: 50%;
+    margin-top: -32px;
+    width: 64px;
+    height: 64px;
+    padding: 0;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+  .v-nav:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(137, 93, 255, 0.55);
+  }
+  .v-nav--prev {
+    left: 60px;
+  }
+  .v-nav--next {
+    right: 60px;
   }
 </style>
 
 <script>
-  // Verticals carousel: an endless belt scrolling left. The list is rendered
-  // twice, so wrapping by one set width is seamless. The card nearest the fixed
-  // centre gets .is-center and lightens as it passes through.
+  // Verticals carousel: the arrows move the belt one card at a time, keeping a
+  // card exactly on the centre. The list is rendered three times and the index
+  // wraps back to the middle copy once a run ends, so the cycle never stops.
   document.querySelectorAll<HTMLElement>('.vcarousel').forEach((car) => {
     const track = car.querySelector<HTMLElement>('.vtrack');
     if (!track) return;
     const items = Array.from(track.querySelectorAll<HTMLElement>('.v-item'));
-    if (items.length < 2) return;
+    if (items.length < 3) return;
 
-    const half = Math.floor(items.length / 2);
-    const period = items[half].offsetLeft - items[0].offsetLeft;
-    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const SPEED = 50; // px per second
+    const setSize = items.length / 3;
+    const cs = getComputedStyle(car);
+    const px = (name: string) => parseFloat(cs.getPropertyValue(name));
+    const LG = px('--v-lg'), MD = px('--v-md'), SM = px('--v-sm'), GAP = px('--v-gap');
+    const slotOf = (dist: number) => (dist === 0 ? LG : dist === 1 ? MD : SM);
+    const distOf = (i: number) => Math.min(Math.abs(i - index), 4);
+    let index = setSize;
+    let moving = false;
 
-    let offset = 0, last = 0, paused = false;
-    car.addEventListener('pointerenter', () => { paused = true; });
-    car.addEventListener('pointerleave', () => { paused = false; });
-
-    const markCentre = () => {
-      const box = car.getBoundingClientRect();
-      const mid = box.left + box.width / 2;
-      let best = items[0], bestD = Infinity;
+    const setTransition = (value: string) => {
+      track.style.transition = value;
       for (const it of items) {
-        const r = it.getBoundingClientRect();
-        const d = Math.abs(r.left + r.width / 2 - mid);
-        if (d < bestD) { bestD = d; best = it; }
+        it.style.transition = value;
+        const card = it.querySelector<HTMLElement>('.v-card');
+        if (card) card.style.transition = value;
       }
-      for (const it of items) it.classList.toggle('is-center', it === best);
     };
 
-    const frame = (now: number) => {
-      if (!last) last = now;
-      const dt = Math.min(0.05, (now - last) / 1000);
-      last = now;
-      if (!paused && !reduce && period > 0) {
-        offset = (offset + SPEED * dt) % period;
-        track.style.transform = `translateX(${-offset}px)`;
+    const place = (animate: boolean) => {
+      if (!animate) setTransition('none');
+      // Slots resize with the cards, so walk the row to find where the centred
+      // card lands rather than assuming a fixed step.
+      let x = 0, centreOfTarget = 0;
+      for (let i = 0; i < items.length; i++) {
+        const w = slotOf(distOf(i));
+        if (i === index) centreOfTarget = x + w / 2;
+        x += w + GAP;
       }
-      markCentre();
-      requestAnimationFrame(frame);
+      track.style.transform = `translateX(${car.clientWidth / 2 - centreOfTarget}px)`;
+      for (let i = 0; i < items.length; i++) items[i].dataset.dist = String(distOf(i));
+      if (!animate) {
+        void track.offsetWidth; // flush the jump before transitions come back
+        setTransition('');
+      }
     };
-    requestAnimationFrame(frame);
+
+    const go = (delta: number) => {
+      if (moving) return;
+      moving = true;
+      index += delta;
+      place(true);
+    };
+
+    track.addEventListener('transitionend', (e) => {
+      if (e.target !== track || e.propertyName !== 'transform') return;
+      moving = false;
+      if (index >= setSize * 2) { index -= setSize; place(false); }
+      else if (index < setSize) { index += setSize; place(false); }
+    });
+
+    car.querySelector('.v-nav--prev')?.addEventListener('click', () => go(-1));
+    car.querySelector('.v-nav--next')?.addEventListener('click', () => go(1));
+
+    place(false);
+    window.addEventListener('resize', () => place(false), { passive: true });
   });
 </script>
