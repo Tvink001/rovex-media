@@ -204,8 +204,6 @@ const description =
     --v-md: 300px;
     --v-sm: 225px;
     --v-gap: 30px;
-    /* inset of the arrows from the outer edge of the outermost card */
-    --v-nav-pad: 25px;
   }
   .vtrack {
     display: flex;
@@ -286,14 +284,11 @@ const description =
     background: rgba(255, 255, 255, 0.12);
     border-color: rgba(137, 93, 255, 0.55);
   }
-  /* Sit over the outermost card rather than beside it: step in from the middle
-     past half the centre card, a side card and the gaps to reach that card's
-     outer edge, then nudge inwards by --v-nav-pad. */
   .v-nav--prev {
-    left: calc(50% - var(--v-lg) / 2 - var(--v-gap) - var(--v-md) - var(--v-gap) - var(--v-sm) + var(--v-nav-pad));
+    left: 60px;
   }
   .v-nav--next {
-    right: calc(50% - var(--v-lg) / 2 - var(--v-gap) - var(--v-md) - var(--v-gap) - var(--v-sm) + var(--v-nav-pad));
+    right: 60px;
   }
 </style>
 
