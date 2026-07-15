@@ -236,10 +236,6 @@ const description =
   }
   .v-item[data-dist='3'] {
     width: var(--v-sm);
-    opacity: 0.22;
-  }
-  .v-item[data-dist='4'] {
-    width: var(--v-sm);
     opacity: 0;
   }
 
@@ -254,8 +250,7 @@ const description =
     transform: scale(1.1111); /* 400 / 360 */
   }
   .v-item[data-dist='2'] .v-card,
-  .v-item[data-dist='3'] .v-card,
-  .v-item[data-dist='4'] .v-card {
+  .v-item[data-dist='3'] .v-card {
     transform: scale(0.625); /* 225 / 360 */
   }
 
@@ -312,7 +307,7 @@ const description =
     const px = (name: string) => parseFloat(cs.getPropertyValue(name));
     const LG = px('--v-lg'), MD = px('--v-md'), SM = px('--v-sm'), GAP = px('--v-gap');
     const slotOf = (dist: number) => (dist === 0 ? LG : dist === 1 ? MD : SM);
-    const distOf = (i: number) => Math.min(Math.abs(i - index), 4);
+    const distOf = (i: number) => Math.min(Math.abs(i - index), 3);
     let index = setSize;
     let moving = false;
 
