@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 // Public marketing brand is "Rovex Media"; the legal entity in Terms/Privacy is
 // "Rhine Media" (rhine-media.com). Both are intentional - see src/data/site.ts.
 export default defineConfig({
-  site: 'https://rovex-media.com',
+  site: 'https://rovex-media.pages.dev',
   output: 'static',
   prefetch: { prefetchAll: true, defaultStrategy: 'hover' },
   build: { inlineStylesheets: 'always' },
