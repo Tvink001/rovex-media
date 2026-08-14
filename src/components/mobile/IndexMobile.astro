@@ -121,7 +121,7 @@ import { verticals, sources, partners, art } from '../../data/site.ts';
       width={257}
       loading="lazy"
       class="m-art"
-      style="left:-49px;top:-207px;width:128.391px;height:134px;z-index:3;animation:floatY 3s ease-in-out infinite;--fy:14px"
+      style="left:-49px;top:-147px;width:128.391px;height:134px;z-index:3;animation:floatY 3s ease-in-out infinite;--fy:14px"
     />
     <div class="m-head">
       <p class="m-eyebrow">Our Verticals</p>
@@ -517,9 +517,10 @@ import { verticals, sources, partners, art } from '../../data/site.ts';
     gap: 30px;
   }
   .m-verts {
-    /* The bolt belongs to this section and starts 30px clear of the card
-       above, so the gap has to hold it: 30 + the bolt's 90px of overhang. */
-    margin-top: 120px;
+    /* Puts the eyebrow 60px below the Grow card. The bolt hangs off this
+       section's top edge, so its own offset absorbs any change here and it
+       stays tucked behind that card. */
+    margin-top: 60px;
     z-index: 1;
   }
   .m-sources {
