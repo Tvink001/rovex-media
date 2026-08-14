@@ -1,6 +1,6 @@
 ---
 import { footer } from '../data/site.ts';
-import { socialSvgMobile, socialBox } from '../data/social-icons.ts';
+import { socialSvg, socialBox } from '../data/social-icons.ts';
 ---
 
 <footer class="mfoot">
@@ -67,7 +67,7 @@ import { socialSvgMobile, socialBox } from '../data/social-icons.ts';
             rel={s.href.startsWith('http') ? 'noopener' : undefined}
             target={s.href.startsWith('http') ? '_blank' : undefined}
             style={`padding:${socialBox[s.icon].pad};--ico:${socialBox[s.icon].size}px`}
-            set:html={socialSvgMobile[s.icon]}
+            set:html={socialSvg[s.icon]}
           />
         </li>
       ))

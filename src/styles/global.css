@@ -275,10 +275,10 @@ button {
   color: #edf0fa;
 }
 .social {
-  transition: border-color 0.15s, background 0.15s;
+  transition: background 0.15s;
 }
-.social:hover {
-  border-color: #895dff;
+.social:hover::before {
+  background: var(--hairline-accent);
 }
 .fld {
   background: rgba(33, 16, 78, 0.4);

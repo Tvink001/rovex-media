@@ -29,13 +29,13 @@ import { socialSvg } from '../data/social-icons.ts';
         {footer.socials.map((s) => (
           <li>
             <a
-              class="social"
+              class="social hairline-edge"
               href={s.href}
               aria-label={s.label}
               rel={s.href.startsWith('http') ? 'noopener' : undefined}
               target={s.href.startsWith('http') ? '_blank' : undefined}
-              style="background:#070128;border:1px solid #fff;border-radius:14.857px;width:65px;height:65px;display:flex;align-items:center;justify-content:center"
-              set:html={socialSvg[s.icon as keyof typeof socialSvg]}
+              style="background:#070128;border-radius:14.857px;width:65px;height:65px;display:flex;align-items:center;justify-content:center"
+              set:html={socialSvg[s.icon]}
             />
           </li>
         ))}
