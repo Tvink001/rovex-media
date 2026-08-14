@@ -1,0 +1,257 @@
+---
+import { nav, footer } from '../data/site.ts';
+import { socialSvgMobile, socialBox } from '../data/social-icons.ts';
+
+// The menu repeats the primary nav and drops to the two legal pages; Contact
+// already sits in `nav`, so it is not duplicated below the socials.
+const legal = [
+  { label: 'Terms of Service', href: '/terms' },
+  { label: 'Privacy Policy', href: '/privacy' },
+];
+---
+
+<div id="mobile-menu" class="mmenu" hidden>
+  <div class="mmenu-bar">
+    <a href="/" style="display:flex;gap:10px;align-items:center;cursor:pointer">
+      <span
+        aria-hidden="true"
+        style="background:#895dff;display:flex;align-items:center;justify-content:center;border-radius:9px;width:36px;height:36px;font-family:var(--font-manrope);font-weight:700;font-size:13px;color:#130d00"
+        >RM</span
+      >
+      <span style="font-family:var(--font-manrope);font-weight:700;font-size:18px;color:#fff"
+        >Rovex <span style="color:#895dff">Media</span></span
+      >
+    </a>
+    <button type="button" class="mnav-close" aria-label="Close menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path
+          d="M6.34668 6.34461L17.6604 17.6583"
+          stroke="#fff"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+        <path
+          d="M17.6604 6.35168L6.34668 17.6654"
+          stroke="#fff"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+      </svg>
+    </button>
+  </div>
+
+  <nav class="mmenu-nav" aria-label="Primary">
+    {nav.map((i) => <a href={i.href}>{i.label}</a>)}
+  </nav>
+
+  <ul class="mmenu-soc">
+    {
+      footer.socials.map((s) => (
+        <li>
+          <a
+            class="hairline-edge"
+            href={s.href}
+            aria-label={s.label}
+            rel={s.href.startsWith('http') ? 'noopener' : undefined}
+            target={s.href.startsWith('http') ? '_blank' : undefined}
+            style={`padding:${socialBox[s.icon].pad};--ico:${socialBox[s.icon].size}px`}
+            set:html={socialSvgMobile[s.icon]}
+          />
+        </li>
+      ))
+    }
+  </ul>
+
+  <nav class="mmenu-legal" aria-label="Legal">
+    {legal.map((l) => <a href={l.href}>{l.label}</a>)}
+  </nav>
+</div>
+
+<style>
+  .mmenu {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    background: #422b7f;
+    /* The mockup is drawn at 812px tall, where every clamp below resolves to
+       its design value; shorter screens tighten up instead of overflowing. */
+    padding-bottom: clamp(24px, 11vh, 89px);
+  }
+  .mmenu[hidden] {
+    display: none;
+  }
+  /* The design lays a downward fade over everything below the bar. Fixed, not
+     absolute: on a short screen the panel scrolls, and an absolute layer would
+     scroll out from under the content it is tinting. */
+  .mmenu::before {
+    content: '';
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 66px;
+    bottom: 0;
+    background: linear-gradient(180deg, #070028 19.23%, rgba(66, 43, 127, 0) 116.95%);
+    pointer-events: none;
+  }
+  .mmenu > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .mmenu-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    background: #070028;
+    flex: none;
+  }
+  .mnav-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    margin: -10px -10px -10px 0;
+    padding: 0;
+    border: 0;
+    background: none;
+  }
+
+  .mmenu-nav {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(28px, 7.4vh, 60px);
+    padding: clamp(24px, 7.4vh, 60px) 20px;
+  }
+  .mmenu-nav a {
+    font-family: var(--f-body);
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 15px;
+    letter-spacing: normal;
+    text-transform: uppercase;
+    color: #fff;
+  }
+  .mmenu-nav a:hover {
+    color: #895dff;
+  }
+
+  .mmenu-soc {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    margin: 0 0 35px;
+    padding: 0;
+    flex: none;
+  }
+  .mmenu-soc a {
+    background: rgba(7, 1, 40, 0.1);
+    border-radius: 14.857px;
+    width: 65px;
+    height: 65px;
+    display: flex;
+    align-items: flex-start;
+    gap: 18.571px;
+    transition: background 0.15s;
+  }
+  .mmenu-soc a:hover::before {
+    background: var(--hairline-accent);
+  }
+  .mmenu-soc a :global(svg) {
+    flex: none;
+    width: var(--ico);
+    height: auto;
+  }
+
+  .mmenu-legal {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    font-size: 13px;
+    line-height: 24px;
+    letter-spacing: 0.455px;
+    color: rgba(255, 255, 255, 0.5);
+  }
+  .mmenu-legal a {
+    color: inherit;
+  }
+  .mmenu-legal a:hover {
+    color: #edf0fa;
+  }
+</style>
+
+<script>
+  // Menu overlay: opened from the burger in MobileHeader, which lives inside
+  // the scaled canvas and so cannot host a fixed-position panel itself.
+  const menu = document.getElementById('mobile-menu');
+  const openBtn = document.querySelector<HTMLButtonElement>('.mnav-open');
+  const closeBtn = document.querySelector<HTMLButtonElement>('.mnav-close');
+
+  if (menu && openBtn && closeBtn) {
+    const setOpen = (open: boolean) => {
+      if (open) {
+        // Locking the page hides its scrollbar, which widens both the layout
+        // behind and the viewport the fixed overlay is sized against. Hold
+        // that width on each so the panel stays exactly as wide as the layer
+        // it covers. Zero on overlay-scrollbar devices, which is every phone.
+        const bar = window.innerWidth - document.documentElement.clientWidth;
+        const gap = bar > 0 ? `${bar}px` : '';
+        menu.style.right = gap;
+        document.documentElement.style.paddingRight = gap;
+      } else {
+        document.documentElement.style.paddingRight = '';
+      }
+      menu.hidden = !open;
+      openBtn.setAttribute('aria-expanded', String(open));
+      document.documentElement.style.overflow = open ? 'hidden' : '';
+      (open ? closeBtn : openBtn).focus();
+    };
+
+    openBtn.addEventListener('click', () => setOpen(true));
+    closeBtn.addEventListener('click', () => setOpen(false));
+
+    // Same-page anchors need the panel out of the way to reveal the target.
+    menu.addEventListener('click', (e) => {
+      if ((e.target as HTMLElement).closest('a')) setOpen(false);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !menu.hidden) setOpen(false);
+    });
+
+    // Rotating to a width that shows the desktop canvas leaves the overlay
+    // stranded over a layout it does not belong to.
+    window.addEventListener(
+      'resize',
+      () => {
+        if (!menu.hidden && window.innerWidth > 768) setOpen(false);
+      },
+      { passive: true },
+    );
+  }
+
+  // Section ids live on the desktop canvas. A link such as /#verticals opened
+  // on a phone would land on a hidden element, so redirect it to the mobile
+  // twin, which carries the same id with an -m suffix.
+  const followHash = () => {
+    const id = location.hash.slice(1);
+    if (!id || id.endsWith('-m')) return;
+    const target = document.getElementById(id);
+    if (target && !target.offsetParent && !target.getClientRects().length) {
+      document.getElementById(`${id}-m`)?.scrollIntoView();
+    }
+  };
+  window.addEventListener('hashchange', followHash);
+  followHash();
+</script>

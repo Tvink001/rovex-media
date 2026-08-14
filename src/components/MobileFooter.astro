@@ -1,0 +1,193 @@
+---
+import { footer } from '../data/site.ts';
+import { socialSvgMobile, socialBox } from '../data/social-icons.ts';
+---
+
+<footer class="mfoot">
+  <a href="/" style="display:flex;gap:10px;align-items:center;cursor:pointer">
+    <span
+      aria-hidden="true"
+      style="background:#895dff;display:flex;align-items:center;justify-content:center;border-radius:9px;width:36px;height:36px;font-family:var(--font-manrope);font-weight:700;font-size:13px;color:#130d00"
+      >RM</span
+    >
+    <span style="font-family:var(--font-manrope);font-weight:700;font-size:18px;color:#fff"
+      >Rovex <span style="color:#895dff">Media</span></span
+    >
+  </a>
+
+  <p class="mfoot-about">
+    Premium performance media buying for the world's most ambitious advertisers and affiliate
+    partners. Built for scale. Optimised for ROI.
+  </p>
+
+  {/* The three desktop link columns collapse into disclosure rows. */}
+  <div class="mfoot-cols">
+    {
+      footer.columns.map((col, i) => (
+        <>
+          {i > 0 && <div class="mfoot-rule" />}
+          <details class="mfoot-col">
+            <summary>
+              <span>{col.heading}</span>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path
+                  d="M4 6L8 10L12 6"
+                  stroke="#fff"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </summary>
+            <div class="mfoot-links">
+              {col.links.map((l) => (
+                <a class="flink" href={l.href}>
+                  {l.label}
+                </a>
+              ))}
+            </div>
+          </details>
+        </>
+      ))
+    }
+  </div>
+
+  <nav class="mfoot-legal" aria-label="Legal">
+    {footer.legal.map((l) => <a class="flink" href={l.href}>{l.label}</a>)}
+  </nav>
+
+  <ul class="mfoot-soc">
+    {
+      footer.socials.map((s) => (
+        <li>
+          <a
+            class="social hairline-edge"
+            href={s.href}
+            aria-label={s.label}
+            rel={s.href.startsWith('http') ? 'noopener' : undefined}
+            target={s.href.startsWith('http') ? '_blank' : undefined}
+            style={`padding:${socialBox[s.icon].pad};--ico:${socialBox[s.icon].size}px`}
+            set:html={socialSvgMobile[s.icon]}
+          />
+        </li>
+      ))
+    }
+  </ul>
+
+  <p class="mfoot-copy">© 2026 Rovex Media. All rights reserved. rhine-media.com</p>
+</footer>
+
+<style>
+  .mfoot {
+    position: relative;
+    width: 100%;
+    padding: 30px 20px;
+    background: #070128;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    z-index: 30;
+  }
+  .mfoot > * {
+    width: min(335px, 100%);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .mfoot-about {
+    font-size: 12px;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .mfoot-cols {
+    display: flex;
+    flex-direction: column;
+    gap: 21px;
+  }
+  .mfoot-rule {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+  }
+  .mfoot-col summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    list-style: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.96px;
+    text-transform: uppercase;
+    color: #edf0fa;
+  }
+  .mfoot-col summary::-webkit-details-marker {
+    display: none;
+  }
+  .mfoot-col summary svg {
+    flex: none;
+    transition: transform 0.2s ease;
+  }
+  .mfoot-col[open] summary svg {
+    transform: rotate(180deg);
+  }
+  .mfoot-links {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+    padding-top: 16px;
+    font-size: 13px;
+    line-height: 24px;
+    color: rgba(255, 255, 255, 0.5);
+  }
+  .mfoot-links a {
+    color: inherit;
+  }
+
+  .mfoot-legal {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    font-size: 13px;
+    line-height: 24px;
+    letter-spacing: 0.455px;
+    color: rgba(255, 255, 255, 0.5);
+  }
+  .mfoot-legal a {
+    color: inherit;
+  }
+
+  .mfoot-soc {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .mfoot-soc a {
+    background: #070128;
+    border-radius: 14.857px;
+    width: 65px;
+    height: 65px;
+    display: flex;
+    align-items: flex-start;
+    gap: 18.571px;
+  }
+  .mfoot-soc a :global(svg) {
+    /* The design's padding plus glyph adds up to the full 65px, so without
+       this the glyph loses the 2px the borders take. */
+    flex: none;
+    width: var(--ico);
+    height: auto;
+  }
+
+  .mfoot-copy {
+    font-size: 11px;
+    line-height: 24px;
+    letter-spacing: 0.385px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.5);
+  }
+</style>

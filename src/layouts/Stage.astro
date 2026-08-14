@@ -2,6 +2,9 @@
 import { Font } from 'astro:assets';
 import CanvasHeader from '../components/CanvasHeader.astro';
 import CanvasFooter from '../components/CanvasFooter.astro';
+import MobileHeader from '../components/MobileHeader.astro';
+import MobileFooter from '../components/MobileFooter.astro';
+import MobileMenu from '../components/MobileMenu.astro';
 import { site } from '../data/site.ts';
 import '../styles/global.css';
 
@@ -15,6 +18,10 @@ interface Props {
 const { title, description, pageH } = Astro.props;
 const docTitle = `${title} | ${site.brand}`;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
+
+// A page opts into the mobile layout by filling the "mobile" slot. Pages that
+// have not been adapted yet keep the desktop canvas at every width.
+const dual = Astro.slots.has('mobile');
 ---
 
 <!doctype html>
@@ -57,8 +64,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
     </script>
   </head>
   <body>
-    <a href="#main" class="skip-link">Skip to content</a>
-    <div class="stage">
+    <a href="#main" class:list={['skip-link', dual && 'skip-link--d']}>Skip to content</a>
+    {dual && <a href="#main-m" class="skip-link skip-link--m">Skip to content</a>}
+    <div class="stage" data-dual={dual ? '' : undefined}>
       <div class="canvas-outer" style={`--page-h:${pageH}px`}>
         <div class="canvas">
           <CanvasHeader />
@@ -68,6 +76,23 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
           <CanvasFooter />
         </div>
       </div>
+
+      {
+        dual && (
+          <div class="mstage">
+            <div class="mcanvas">
+              <MobileHeader />
+              <main id="main-m" style="display:contents">
+                <slot name="mobile" />
+              </main>
+              <MobileFooter />
+            </div>
+          </div>
+        )
+      }
     </div>
+    {/* Lives outside the scaled canvas: a fixed overlay cannot escape an
+        ancestor that carries a transform. */}
+    {dual && <MobileMenu />}
   </body>
 </html>
