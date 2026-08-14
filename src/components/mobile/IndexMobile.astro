@@ -121,7 +121,7 @@ import { verticals, sources, partners, art } from '../../data/site.ts';
       width={257}
       loading="lazy"
       class="m-art"
-      style="left:-49px;top:-110px;width:128.391px;height:134px;z-index:3;animation:floatY 3s ease-in-out infinite;--fy:14px"
+      style="left:-49px;top:-90px;width:128.391px;height:134px;z-index:3;animation:floatY 3s ease-in-out infinite;--fy:14px"
     />
     <div class="m-head">
       <p class="m-eyebrow">Our Verticals</p>
@@ -517,9 +517,9 @@ import { verticals, sources, partners, art } from '../../data/site.ts';
     gap: 30px;
   }
   .m-verts {
-    /* The bolt hangs off this section's top edge and stays 30px clear of the
-       card above, so its offset moves with this gap rather than against it. */
-    margin-top: 140px;
+    /* The bolt belongs to this section and starts 30px clear of the card
+       above, so the gap has to hold it: 30 + the bolt's 90px of overhang. */
+    margin-top: 120px;
     z-index: 1;
   }
   .m-sources {
