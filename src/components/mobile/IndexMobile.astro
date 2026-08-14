@@ -1,0 +1,649 @@
+---
+import { Image } from 'astro:assets';
+import { verticals, sources, partners, art } from '../../data/site.ts';
+
+// Mobile landing, rebuilt from the 375px design. Structure, spacing and the
+// order of the blocks come from the mockup; every string, image and surface
+// treatment (the masked .hairline borders, the brand purple) comes from the
+// desktop build, so the two stay in sync.
+//
+// Sections stack in normal flow - the margin above each one is set so it lands
+// on its design coordinate, noted in the comment beside it. Decorative art is
+// absolute against the section it overlaps, so it travels with that section
+// instead of drifting when copy changes.
+---
+
+<div class="m">
+  {/* Background fades, painted over the #422b7f canvas. */}
+  <div class="m-fade m-fade1" aria-hidden="true"></div>
+  <div class="m-fade m-fade2" aria-hidden="true"></div>
+  <div class="m-fade m-fade3" aria-hidden="true"></div>
+
+  {/* HERO */}
+  <section class="m-hero">
+    <Image
+      src={art.rmUnder}
+      alt=""
+      width={290}
+      loading="eager"
+      class="m-art"
+      style="left:169.33px;top:-180.28px;width:145.072px;height:139.279px;opacity:0.5;z-index:0;animation:floatY 3s ease-in-out infinite;--fy:9px"
+    />
+    <Image
+      src={art.rmUpper}
+      alt=""
+      width={438}
+      loading="eager"
+      class="m-art"
+      style="left:60px;top:-253px;width:219.027px;height:193.848px;z-index:1;animation:floatY 3s ease-in-out infinite;--fy:-14px"
+    />
+    <div class="m-col m-hero-in">
+      <div class="m-stack20">
+        <h1 class="m-h1">
+          Performance<br />Media Buying<br />Team <span class="ac">Rovex Media</span>
+        </h1>
+        <p class="m-lede">
+          We buy traffic for <strong>Finance, Nutra, SaaS, Crypto Offers, iGaming</strong> and more —
+          across all major channels, in every major GEO, at premium scale
+        </p>
+      </div>
+      <div class="m-btns">
+        <a href="/contact" class="m-btn m-btn--primary">
+          Start Cooperation
+          <span class="m-btn-arrow">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+              <path
+                d="M4.5 8.25L9 3.75L13.5 8.25M9 3.75V14.25"
+                stroke="#fff"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+            </svg>
+          </span>
+        </a>
+        <a href="/contact" class="m-btn m-btn--ghost hairline-edge">Get in Touch</a>
+      </div>
+    </div>
+  </section>
+
+  {/* STATS */}
+  <section class="m-col m-stats">
+    <div class="m-stat"><span class="hairline" aria-hidden="true"></span>
+      <p class="m-stat-n">2.2B+</p>
+      <div class="m-stat-t">
+        <p class="m-stat-l">Ad Impressions / Month</p>
+        <p class="m-stat-s">Across all traffic sources</p>
+      </div>
+    </div>
+    <div class="m-stat"><span class="hairline" aria-hidden="true"></span>
+      <p class="m-stat-n">280%</p>
+      <div class="m-stat-t">
+        <p class="m-stat-l">Average ROI</p>
+        <p class="m-stat-s">Verified by partners</p>
+      </div>
+    </div>
+    <div class="m-stat"><span class="hairline" aria-hidden="true"></span>
+      <p class="m-stat-n">36+</p>
+      <div class="m-stat-t">
+        <p class="m-stat-l">Global GEOs</p>
+        <p class="m-stat-s">Tier-1 &amp; emerging markets</p>
+      </div>
+    </div>
+  </section>
+
+  {/* CTA 1: Ready to Grow */}
+  <section id="why-m" class="m-col m-cta m-cta--grow">
+    <Image
+      src={art.decoLightning}
+      alt=""
+      width={257}
+      loading="lazy"
+      class="m-art"
+      style="left:239px;top:-49px;width:128.391px;height:134px;z-index:3;animation:floatY 3s ease-in-out infinite;--fy:-14px"
+    />
+    <h2 class="m-h2">Ready to <span class="ac">Grow</span><br />Your Revenue?</h2>
+    <p class="m-body">
+      Join the brands and affiliate partners who trust Rovex Media to deliver performance at scale,
+      in every major GEO
+    </p>
+    <div class="m-feat m-feat--grow">
+      <p><strong>Fast Campaign Launch —</strong><br />Live in under 48 hours</p>
+      <p><strong>Dedicated Account Manager —</strong><br />Direct Telegram/Skype access</p>
+      <p><strong>Real-Time Reporting —</strong><br />Full transparency on every dollar</p>
+    </div>
+  </section>
+
+  {/* OUR VERTICALS */}
+  <section id="verticals-m" class="m-col m-verts">
+    <Image
+      src={art.decoLightning}
+      alt=""
+      width={257}
+      loading="lazy"
+      class="m-art"
+      style="left:-49px;top:-90px;width:128.391px;height:134px;z-index:3;animation:floatY 3s ease-in-out infinite;--fy:14px"
+    />
+    <div class="m-head">
+      <p class="m-eyebrow">Our Verticals</p>
+      <h2 class="m-h2">Niches We <span class="ac">Dominate</span></h2>
+      <p class="m-body">
+        Join the brands and partners who trust Rovex Media<br />to deliver performance, in every
+        GEO.
+      </p>
+    </div>
+    <ul class="m-vlist">
+      {
+        verticals.map((v) => (
+          <li class="m-vcard">
+            <p class="m-badge">{v.badge}</p>
+            <div class="m-vtext">
+              <h3 class="m-vtitle">{v.title}</h3>
+              <p class="m-vdesc">{v.desc}</p>
+            </div>
+            <div class="m-vicon">
+              <Image src={v.img} alt="" width={120} style="width:100%;height:100%;object-fit:contain" />
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  {/* CTA 2: Ready to Scale */}
+  <section class="m-col m-cta m-cta--scale">
+    <h2 class="m-h2">Ready to <span class="ac">Scale</span><br />Your Campaigns?</h2>
+    <p class="m-body">
+      Partner with a team that treats your budget like its own — full accountability, direct
+      communication and measurable results from day one
+    </p>
+    <div class="m-feat m-feat--scale">
+      <p><strong>Multi-GEO Scaling —</strong><br />Launch in 60+ markets instantly</p>
+      <p><strong>Transparent Pricing —</strong><br />No hidden fees, ever</p>
+      <p><strong>24/7 Monitoring —</strong><br />Always watching your spend</p>
+    </div>
+  </section>
+
+  {/* TRAFFIC SOURCES */}
+  <section id="sources-m" class="m-col m-sources">
+    <Image
+      src={art.decoMonitoring}
+      alt=""
+      width={296}
+      loading="lazy"
+      class="m-art"
+      style="left:226px;top:-232px;width:148px;height:122px;z-index:3;animation:floatY 3s ease-in-out infinite;animation-delay:-2.2s;--fy:-18px"
+    />
+    <div class="m-head">
+      <p class="m-eyebrow">Traffic Sources We Master</p>
+      <h2 class="m-h2">Every Major <span class="ac">Channel</span></h2>
+      <p class="m-body">
+        Full-stack traffic expertise across paid, native, push and programmatic channels worldwide.
+      </p>
+    </div>
+    <ul class="m-slist">
+      {
+        sources.map((s) => (
+          <li class="m-scard">
+            <span class="hairline hairline--soft" aria-hidden="true" />
+            <div class="m-sicon">
+              <Image src={s.img} alt="" width={80} style="width:100%;height:100%;object-fit:contain" />
+            </div>
+            <div class="m-stext">
+              <h3 class="m-stitle">{s.title}</h3>
+              <p class="m-ssub">{s.sub}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  {/* TRUSTED PARTNERS */}
+  <section id="partners-m" class="m-partners">
+    <div class="m-col m-head">
+      <p class="m-eyebrow">Trusted Partners &amp; Networks</p>
+      <h2 class="m-h2">Working with the<br /><span class="ac">Best in Class</span></h2>
+      <p class="m-body">
+        We maintain direct relationships with premium<br />ad networks, affiliate networks and CPA
+        platforms.
+      </p>
+    </div>
+    {/* The design runs the logo row wider than the screen; scrolling it keeps
+        every partner reachable instead of clipping the ends. */}
+    <div class="m-marq" role="group" aria-label="Trusted partners and networks">
+      <div class="m-marq-track">
+        {
+          [...partners, ...partners].map((p) => (
+            <Image
+              src={p}
+              alt=""
+              width={Math.round((64 * p.width) / p.height)}
+              height={64}
+              loading="lazy"
+              style="height:32px;width:auto;flex:none"
+            />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* CTA 3: Ready to Maximize */}
+  <section class="m-col m-cta m-cta--max">
+    {/* Centred, not right-hung: Figma's export dropped the -translate-x-1/2
+        that pairs with left:calc(50% + 0.5px). Box sized from the artwork's
+        alpha bounds in both files, since the mockup PNG is a crop of a larger
+        render while the production PNG is already trimmed. */}
+    <Image
+      src={art.decoMaximize}
+      alt=""
+      width={353}
+      loading="lazy"
+      class="m-art"
+      style="left:82px;top:-67.6px;width:176.4px;height:159.8px;z-index:3;animation:floatY 3s ease-in-out infinite;animation-delay:-2.2s;--fy:-18px"
+    />
+    <div class="m-head">
+      <p class="m-eyebrow">Trusted Partners &amp; Networks</p>
+      <h2 class="m-h2 m-h2--c">Ready to<br /><span class="ac">Maximize</span> Your ROI?</h2>
+      <p class="m-body m-body--c">
+        We maintain direct relationships with premium ad networks, affiliate networks and CPA
+        platforms worldwide
+      </p>
+    </div>
+    <div class="m-btns">
+      <a href="/contact" class="m-btn m-btn--primary">
+        Start Cooperation
+        <span class="m-btn-arrow">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <path
+              d="M4.5 8.25L9 3.75L13.5 8.25M9 3.75V14.25"
+              stroke="#fff"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path>
+          </svg>
+        </span>
+      </a>
+      <a href="/contact" class="m-btn m-btn--ghost hairline-edge">Get in Touch</a>
+    </div>
+  </section>
+</div>
+
+<style>
+  /* --------------------------------- shell -------------------------------- */
+  .m {
+    position: relative;
+    z-index: 1;
+    /* clears the 66px header bar; the hero sits 345px down the design */
+    padding-top: 345px;
+    padding-bottom: 33px; /* footer starts at design top 5565 */
+  }
+  .m-col {
+    position: relative;
+    z-index: 2;
+    width: min(335px, 100% - 40px);
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .m-art {
+    position: absolute;
+    object-fit: contain;
+    pointer-events: none;
+    max-width: none;
+  }
+
+  .m-fade {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .m-fade1 {
+    top: 0;
+    height: 1526px;
+    background: linear-gradient(180deg, #070028 32.79%, rgba(66, 43, 127, 0) 84.68%);
+  }
+  /* The mockup flips this one, so the solid end sits at the bottom. */
+  .m-fade2 {
+    top: 100px;
+    height: 3662px;
+    background: linear-gradient(0deg, #070028 25.49%, rgba(66, 43, 127, 0) 84.68%);
+  }
+  .m-fade3 {
+    top: 3762px;
+    height: 2380px;
+    background: linear-gradient(180deg, #070028 18.6%, rgba(66, 43, 127, 0) 84.68%);
+  }
+
+  /* ---------------------------------- type -------------------------------- */
+  .ac {
+    color: #895dff;
+  }
+  .m-h1 {
+    font-family: var(--f-head);
+    font-weight: 800;
+    font-size: 34px;
+    line-height: 1.2;
+    text-align: center;
+    color: #fff;
+  }
+  .m-h2 {
+    font-family: var(--f-head);
+    font-weight: 800;
+    font-size: 30px;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+  .m-h2--c {
+    text-align: center;
+  }
+  .m-eyebrow {
+    font-weight: 600;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #fff;
+  }
+  .m-lede {
+    font-size: 13px;
+    line-height: 1.8;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+  }
+  .m-lede strong {
+    font-weight: 700;
+    color: #895dff;
+  }
+  .m-body {
+    font-size: 13px;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.6);
+  }
+  .m-body--c {
+    text-align: center;
+  }
+
+  /* --------------------------------- hero --------------------------------- */
+  .m-hero {
+    position: relative;
+  }
+  .m-hero-in {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  .m-stack20 {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .m-head {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  /* -------------------------------- buttons ------------------------------- */
+  .m-btns {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  .m-btn {
+    display: flex;
+    gap: 17px;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+    padding: 10px 30px;
+    border-radius: 35px;
+    font-family: var(--f-head);
+    font-weight: 700;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+  .m-btn--primary {
+    background: linear-gradient(113deg, #895dff -16.17%, #8b33f7 155.83%);
+    color: #fff;
+  }
+  .m-btn--ghost {
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--ink);
+  }
+  .m-btn-arrow {
+    display: inline-flex;
+    transform: rotate(90deg);
+  }
+
+  /* --------------------------------- stats -------------------------------- */
+  .m-stats {
+    margin-top: 49px; /* design top 758 */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .m-stat {
+    position: relative;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    padding: 15px;
+    border-radius: 20px;
+    background: rgba(44, 27, 94, 0.2);
+  }
+  .m-stat-n {
+    flex: none;
+    width: 107px;
+    font-family: var(--f-head);
+    font-weight: 700;
+    font-size: 40px;
+    letter-spacing: -1.24px;
+    white-space: nowrap;
+    background: linear-gradient(-62deg, #895dff 41%, #caa0ff 106%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .m-stat-t {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .m-stat-l {
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.14px;
+    line-height: 1.2;
+    color: #fff;
+  }
+  .m-stat-s {
+    font-weight: 300;
+    font-size: 13px;
+    letter-spacing: 0.26px;
+    line-height: 1.2;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  /* ------------------------------- CTA blocks ------------------------------ */
+  .m-cta {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    border-radius: 20px;
+  }
+  .m-cta--grow {
+    margin-top: 48px; /* design top 1112, plus 20px of requested breathing room */
+    background: #14093b;
+  }
+  .m-cta--scale {
+    margin-top: 31px; /* design top 3304 */
+    background: rgba(42, 26, 92, 0.59);
+  }
+  .m-cta--max {
+    margin-top: 150px;
+    gap: 30px;
+    padding: 150px 20px 20px;
+    background: #14093b;
+  }
+  .m-feat {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.6);
+  }
+  .m-feat strong {
+    font-weight: 700;
+    color: #fff;
+  }
+  .m-feat--grow {
+    background: linear-gradient(-32deg, rgba(48, 30, 101, 0.25) 11%, rgba(96, 60, 203, 0.25) 83%);
+  }
+  .m-feat--scale {
+    background: rgba(48, 30, 101, 0.2);
+  }
+
+  /* ------------------------------- verticals ------------------------------- */
+  .m-verts,
+  .m-sources {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  .m-verts {
+    /* The bolt belongs to this section and starts 30px clear of the card
+       above, so the gap has to hold it: 30 + the bolt's 90px of overhang. */
+    margin-top: 120px;
+    z-index: 1;
+  }
+  .m-sources {
+    margin-top: 57px; /* design top 3808 */
+  }
+  .m-vlist {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .m-vcard {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    border-radius: 20px;
+    background: #070128;
+    overflow: hidden;
+  }
+  .m-badge {
+    align-self: flex-start;
+    padding: 10px;
+    border-radius: 10px;
+    background: var(--chip);
+    font-weight: 600;
+    font-size: 8px;
+    line-height: 1;
+    letter-spacing: 0.56px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: #895dff;
+  }
+  .m-vtext {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .m-vtitle {
+    font-size: 20px;
+    line-height: 1;
+  }
+  .m-vdesc {
+    font-size: 13px;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.5);
+  }
+  .m-vicon {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 60px;
+    height: 60px;
+  }
+
+  /* ----------------------------- traffic sources --------------------------- */
+  .m-slist {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .m-scard {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 15px;
+    border-radius: 20px;
+    background: linear-gradient(to bottom, rgba(42, 26, 92, 0.4) 40%, rgba(89, 55, 194, 0.4) 208%);
+  }
+  .m-sicon {
+    width: 40px;
+    height: 40px;
+  }
+  .m-stext {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .m-stitle {
+    font-size: 14px;
+    line-height: 1;
+  }
+  .m-ssub {
+    font-size: 13px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  /* -------------------------------- partners ------------------------------- */
+  .m-partners {
+    position: relative;
+    z-index: 2;
+    margin-top: 65px; /* design top 4686 */
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  /* This heading runs wider than the standard column in the mockup, which is
+     what keeps its description on the intended two lines. */
+  .m-partners .m-head {
+    width: min(353px, 100% - 22px);
+  }
+  .m-marq {
+    overflow: hidden;
+    width: 100%;
+  }
+  .m-marq-track {
+    display: flex;
+    gap: 57.333px;
+    align-items: center;
+    width: max-content;
+    animation: mmarq 32s linear infinite;
+  }
+  @keyframes mmarq {
+    to {
+      /* one full set plus the gap that follows it */
+      transform: translateX(calc(-50% - 28.667px));
+    }
+  }
+</style>
